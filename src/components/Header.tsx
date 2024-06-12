@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BsCart4 } from "react-icons/bs";
-import { useAppSelector } from "../utils/appStore";
+import { LiaSignOutAltSolid } from "react-icons/lia";
+import { useAppDispatch, useAppSelector } from "../utils/appStore";
 import ShoppingItems from "./ShoppingItems";
+import { toggleStat } from "../utils/signinSlice";
 
 const Header: React.FC = () => {
   const [isCartVisible, setIsCartVisible] = useState<boolean>(false);
   const [shouldRender, setShouldRender] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isCartVisible) {
@@ -27,6 +30,10 @@ const Header: React.FC = () => {
     }
   };
 
+  const handleSignOut = () => {
+    dispatch(toggleStat());
+  };
+
   const onAnimationEnd = () => {
     if (!isCartVisible) {
       setShouldRender(false);
@@ -41,12 +48,20 @@ const Header: React.FC = () => {
           src="https://image.freepik.com/free-vector/online-shop-logo-template_59362-81.jpg"
           alt="logo"
         />
-        <BsCart4
-          size={40}
-          color="white"
-          className="cursor-pointer hover:fill-fuchsia-800 active:scale-95"
-          onClick={handleCartVisible}
-        />
+        <div className="flex justify-between items-center">
+          <LiaSignOutAltSolid
+            size={40}
+            color="white"
+            className="mr-8 cursor-pointer hover:fill-fuchsia-800 active:scale-90"
+            onClick={handleSignOut}
+          />
+          <BsCart4
+            size={40}
+            color="white"
+            className="cursor-pointer hover:fill-fuchsia-800 active:scale-90"
+            onClick={handleCartVisible}
+          />
+        </div>
       </div>
       {shouldRender && (
         <div
