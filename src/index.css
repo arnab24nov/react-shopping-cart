@@ -2,5 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* bg-fuchsia-800 */
-/* bg-fuchsia-400  */
+.shimmer-box {
+  @apply m-2 w-[350px] h-[450px] rounded-lg shadow-custom-black;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ShoppingCard from "./ShoppingCard";
+import Shimmer from "./Shimmer";
 
 interface Items {
   id: number;
@@ -27,9 +28,11 @@ const ShoppingPage: React.FC = () => {
   };
   return (
     <div className="h-full pt-28 pb-6 px-6 flex justify-center items-center flex-wrap">
-      {items.map((item) => (
-        <ShoppingCard key={item.id} data={item} />
-      ))}
+      {items.length > 0 ? (
+        items.map((item) => <ShoppingCard key={item.id} data={item} />)
+      ) : (
+        <Shimmer />
+      )}
     </div>
   );
 };
